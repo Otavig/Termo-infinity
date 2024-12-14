@@ -1,46 +1,56 @@
-*{
-    margin: 0px;
-    padding: 0px;
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-:root{
+/* Variáveis globais */
+:root {
     --color-fundo: #6e5c62;
     --color-normal: #4c4347;
     --color-acerto: #3aa394;
     --color-quase: #d3ad69;
 }
 
-body{
+/* Corpo da página */
+body {
     background-color: var(--color-fundo);
 }
 
+/* Cabeçalho */
 .head {
     text-align: center;
     color: white;
-    margin-bottom: 2%;
-    margin-top: 1%;
+    margin: 1% 0 2%;
     font-size: 120%;
 }
 
-.list-input-digit{
+/* Contêiner de entrada */
+.list-input-digit {
     display: flex;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 6px;
-
-    & input{
-        width: 4.2%;
-        height: 8vh;
-        background-color: var(--color-fundo);
-        border: 6.5px solid var(--color-normal);
-        border-radius: 8px;
-        text-align: center;
-        color: white;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 150%;
-    }
+    flex-wrap: wrap; /* Permite que os elementos quebrem para uma nova linha */
+    gap: 6px; /* Espaço entre os inputs */
+    justify-content: center; /* Centraliza os inputs dentro do contêiner */
+    width: 100%; /* Ocupa toda a largura da página */
+    max-width: 600px; /* Limita a largura máxima do contêiner */
+    margin: 0 auto; /* Centraliza o contêiner horizontalmente */    
 }
+
+.list-input-digit input {
+    flex: 1 1 calc(20% - 6px); /* Cada input ocupa 20% do espaço disponível menos o gap */
+    max-width: calc(20% - 6px); /* Garante que a largura máxima seja proporcional */
+    height: 8vh;
+    background-color: var(--color-fundo);
+    border: 6.5px solid var(--color-normal);
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 150%;
+    margin-top: 10px;
+}
+
+
