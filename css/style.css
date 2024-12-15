@@ -9,9 +9,11 @@
 /* Variáveis globais */
 :root {
     --color-fundo: #6e5c62;
-    --color-normal: #4c4347;
+    --color-normal: #4c4347; 
+    --color-selecionado: #8c7b83;
     --color-acerto: #3aa394;
     --color-quase: #d3ad69;
+    --color-bloqueado: #605458;
 }
 
 /* Corpo da página */
@@ -30,17 +32,22 @@ body {
 /* Contêiner de entrada */
 .list-input-digit {
     display: flex;
-    flex-wrap: wrap; /* Permite que os elementos quebrem para uma nova linha */
-    gap: 6px; /* Espaço entre os inputs */
-    justify-content: center; /* Centraliza os inputs dentro do contêiner */
-    width: 100%; /* Ocupa toda a largura da página */
-    max-width: 600px; /* Limita a largura máxima do contêiner */
-    margin: 0 auto; /* Centraliza o contêiner horizontalmente */    
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.list-input-digit input {
-    flex: 1 1 calc(20% - 6px); /* Cada input ocupa 20% do espaço disponível menos o gap */
-    max-width: calc(20% - 6px); /* Garante que a largura máxima seja proporcional */
+.row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.row div {
+    width: 8vh;
     height: 8vh;
     background-color: var(--color-fundo);
     border: 6.5px solid var(--color-normal);
@@ -49,8 +56,42 @@ body {
     color: white;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 150%;
-    margin-top: 10px;
+    font-size: 2.5rem; /* Aumenta a fonte */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    /* Impede seleção de texto */
+    cursor: pointer;
 }
 
+/* Selecionado */
+.row div.selected {
+    border-bottom-width: 15px; /* Deixa a borda inferior mais grossa */
+}
 
+/* Animação de entrada do texto */
+@keyframes text-entry {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Aplica a animação quando o texto é digitado */
+.row div span {
+    display: inline-block; 
+    animation: text-entry 0.5s ease-out;
+}
+
+.cell.locked {
+    background-color: var(--color-bloqueado, #605458); 
+    cursor: not-allowed; 
+}
