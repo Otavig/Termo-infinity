@@ -455,12 +455,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     let correctPositions = Array(lettersPerRow).fill(false);
     let remainingLetters = [...correctWord];
 
-    // 1ª Passada: Verifica letras nas posições corretas (verde)
+    // 1ª Passada: Verifica letras nas posições corretas (azul)
     wordArray.forEach((letter, index) => {
       const cell = rowCells[index];
       if (letter === correctWord[index]) {
-        cell.style.backgroundColor = "#3aa394"; // Verde
-        updateKeyboardKey(letter, "#3aa394"); // Atualiza o teclado para verde
+        cell.style.backgroundColor = "#3aa394"; // azul
+        updateKeyboardKey(letter, "exact-match"); // Atualiza o teclado para azul
         correctPositions[index] = true; // Marca como posição correta
         remainingLetters[index] = null; // Remove a letra correta da lista de comparação
         // Aplica a animação pulse
@@ -477,14 +477,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         remainingLetters.includes(letter) // Existe na palavra restante
       ) {
         cell.style.backgroundColor = "#f3c237"; // Amarelo
-        updateKeyboardKey(letter, "#f3c237"); // Atualiza o teclado para amarelo
+        updateKeyboardKey(letter, "partial-match"); // Atualiza o teclado para amarelo
         remainingLetters[remainingLetters.indexOf(letter)] = null; // Remove a letra usada
         // Aplica a animação com atraso baseado no índice
         cell.classList.add("flip-in");
         cell.style.animationDelay = `${index * 0.1}s`; // Atraso incremental de 0.1s por célula
       } else if (!correctPositions[index]) {
         cell.style.backgroundColor = "#312a2c";
-        updateKeyboardKey(letter, "#312a2c"); // Atualiza o teclado para outra cor _
+        updateKeyboardKey(letter, "disable"); // Atualiza o teclado para outra cor _
         cell.classList.add("flip-in");
         cell.style.animationDelay = `${index * 0.1}s`; // Atraso incremental de 0.1s por célula
       }
@@ -502,30 +502,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     return false;
   }
 
-  // Função para atualizar a cor de uma tecla no teclado
-  function updateKeyboardKey(letter, color) {
+  function updateKeyboardKey(letter, tipo) {
     const tecla = document.getElementById(`keyboard_letra_${letter}`);
     if (tecla) {
-      const currentColor = tecla.style.backgroundColor;
-
-      // Evita rebaixar a cor (verde não vira amarelo, amarelo não vira cor normal)
-      if (
-        (color === "#312a2c" &&
-          currentColor !== "#3aa394" &&
-          currentColor !== "#f3c237") ||
-        (color === "#f3c237" && currentColor !== "#3aa394") ||
-        color === "#3aa394"
-      ) {
-        tecla.style.backgroundColor = color;
-      }
-
-      // Reduz a opacidade se a tecla está "desativada"
-      if (color === "#312a2c") {
-        tecla.style.opacity = "0.3"; // Diminui a opacidade
-        tecla.style.backgroundColor = "#4c4347";
+      // Remove todas as classes antes de definir a nova classe
+      tecla.classList.remove("normal", "partial-match", "exact-match", "disabled");
+      
+      if (tipo === "exact-match") {
+        tecla.classList.add("exact-match"); // Azul
+      } else if (tipo === "partial-match") {
+        tecla.classList.add("partial-match"); // Amarelo
+      } else if (tipo === "disabled") {
+        tecla.classList.add("disabled"); // Transparente (cinza escuro)
+      } else {
+        tecla.classList.add("disabled"); // Classe padrão, caso necessário
       }
     }
   }
+  
 
   // Desbloqueia a próxima fileira
   function unlockNextRow() {

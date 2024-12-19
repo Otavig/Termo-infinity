@@ -283,13 +283,13 @@ h2 {
 @media (max-width: 480px) {
   #tecladoContainer {
     width: 90%; /* Ocupa toda a largura */
-    grid-template-columns: repeat(8, 1fr); /* 10 colunas */
+    grid-template-columns: repeat(6, 1fr); /* 10 colunas */
   }
 
   .tecla, .teclaEspecial {
     height: 40px;
-    width: 30px;
-    font-size: 0.9rem;
+    width: 40px;
+    font-size: 0.6rem;
   }
 
   #keyboard_backspace {
@@ -382,4 +382,21 @@ h2 {
 
 .pulse {
   animation: pulse 0.5s ease-in-out;
+}
+
+.normal {
+  background-color: #312a2c;
+  opacity: 1;
+}
+.partial-match {
+  background-color: #f3c237;
+  opacity: 1;
+}
+.exact-match {
+  background-color: #3aa394;
+  opacity: 1;
+}
+.disabled {
+  background-color: #4c4347;
+  opacity: 0.3;
 }
