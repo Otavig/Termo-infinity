@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo Termo</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="imgs/icon.png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TERMO ∞</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styleTerm.css" />
+    <link rel="shortcut icon" href="imgs/icon.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header>
-        <div class="head">
-            <h1>TERMO</h1>
-        </div>
+      <div class="head">
+        <h1>TERMO ∞</h1>
+        <a href="info.html" target="_blank" class="info-icon"><i class="fas fa-info-circle"></i></a>
+      </div>      
     </header>
     <main>
-        <div class="card">
-            <div class="list-input-digit" id="inputContainer">
-                <!-- Inputs serão gerados dinamicamente -->
-            </div>
+      <div class="card">
+        <div class="list-input-digit" id="inputContainer">
+          <!-- Inputs serão gerados dinamicamente -->
         </div>
+      </div>
     </main>
     <footer>
-        <div class="keyboard">
-            <!-- Espaço reservado para o teclado, caso necessário -->
-        </div>
+      <div class="keyboard" id="tecladoContainer">
+        <!-- Espaço reservado para o teclado -->
+      </div>
     </footer>
 
     <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content" id="modal-content"></div>
+    </div>
 
-        <!-- Modal content -->
-        <div class="modal-content" id="modal-content">
-
-        </div>
-      
-      </div>
+    <div id="customAlert" class="alert" style="display: none">
+      <span id="alertMessage"></span>
+    </div>
 
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>
