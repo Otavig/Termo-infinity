@@ -204,15 +204,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function findWord() {
     while (validWord === null) {
       validWord = await getValidWord(); // Tenta obter uma palavra válida
-      console.log("Tentando...");
 
       // Espera um segundo antes de tentar novamente
       if (validWord === null) {
         await new Promise((resolve) => setTimeout(resolve, 10));
       }
     }
-
-    console.log("Palavra válida encontrada:", validWord);
   }
 
   findWord();
@@ -244,8 +241,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         `https://teste-vercel-cz83.onrender.com/verificar?palavra=${word.toUpperCase()}`
       );
       const data = await response.json();
-
-      console.log("Primerio ", data);
 
       // Se a resposta da API principal for true, retorna true
       if (data === true) {
@@ -428,7 +423,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       selectedCell.textContent = "";
     } else if (e.key === "Enter") {
       let currentWord = getCurrentWord(currentRow);
-      console.log(currentWord);
 
       if (currentWord.length === lettersPerRow) {
         if (isValidWord(currentWord)) {
@@ -446,15 +440,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   function isValidWord(word) {
     const correctWord = validWord.split(""); // Divide a palavra válida em um array de letras
     const wordArray = word.split(""); // Divide a palavra digitada em um array de letras
-
+  
     const rowCells = document.querySelectorAll(
       `[data-row="${currentRow}"] .cell`
     );
-
+  
     // Arrays auxiliares para acompanhar o estado das letras
     let correctPositions = Array(lettersPerRow).fill(false);
     let remainingLetters = [...correctWord];
-
+  
     // 1ª Passada: Verifica letras nas posições corretas (azul)
     wordArray.forEach((letter, index) => {
       const cell = rowCells[index];
@@ -468,54 +462,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         setTimeout(() => cell.classList.remove("pulse"), 500); // Remove a animação após 0.5s
       }
     });
-
-    // 2ª Passada: Verifica letras corretas, mas fora de posição (amarelo)
+  
+    // 2ª Passada: Verifica letras corretas, mas fora de posição (amarelo) e letras incorretas
     wordArray.forEach((letter, index) => {
       const cell = rowCells[index];
-      if (
-        !correctPositions[index] && // Não está na posição correta
-        remainingLetters.includes(letter) // Existe na palavra restante
-      ) {
-        cell.style.backgroundColor = "#f3c237"; // Amarelo
-        updateKeyboardKey(letter, "partial-match"); // Atualiza o teclado para amarelo
-        remainingLetters[remainingLetters.indexOf(letter)] = null; // Remove a letra usada
-        // Aplica a animação com atraso baseado no índice
-        cell.classList.add("flip-in");
-        cell.style.animationDelay = `${index * 0.1}s`; // Atraso incremental de 0.1s por célula
-      } else if (!correctPositions[index]) {
-        cell.style.backgroundColor = "#312a2c";
-        updateKeyboardKey(letter, "disable"); // Atualiza o teclado para outra cor _
-        cell.classList.add("flip-in");
-        cell.style.animationDelay = `${index * 0.1}s`; // Atraso incremental de 0.1s por célula
+      if (!correctPositions[index]) {
+        if (remainingLetters.includes(letter)) {
+          cell.style.backgroundColor = "#f3c237"; // Amarelo
+          updateKeyboardKey(letter, "partial-match"); // Atualiza o teclado para amarelo
+          remainingLetters[remainingLetters.indexOf(letter)] = null; // Remove a letra usada
+          // Aplica a animação com atraso baseado no índice
+          cell.classList.add("flip-in");
+          cell.style.animationDelay = `${index * 0.1}s`; // Atraso incremental de 0.1s por célula
+        } else {
+          cell.style.backgroundColor = "#312a2c"; // Cinza
+          updateKeyboardKey(letter, "disabled"); // Atualiza o teclado para cinza
+          cell.classList.add("flip-in");
+          cell.style.animationDelay = `${index * 0.1}s`; // Atraso incremental de 0.1s por célula
+        }
       }
     });
-    
-    trys++; // tentativas do jogador
-
+  
+    trys++; // Incrementa as tentativas do jogador
+  
     // Verifica se a palavra está completamente correta
     if (word === validWord) {
       lockAllCells();
       telaAcerto(); // Mostra a tela de vitória
       return true;
     }
-
+  
     return false;
-  }
+  }  
 
   function updateKeyboardKey(letter, tipo) {
     const tecla = document.getElementById(`keyboard_letra_${letter}`);
-    if (tecla) {
-      // Remove todas as classes antes de definir a nova classe
-      tecla.classList.remove("normal", "partial-match", "exact-match", "disabled");
-      
-      if (tipo === "exact-match") {
-        tecla.classList.add("exact-match"); // Azul
-      } else if (tipo === "partial-match") {
-        tecla.classList.add("partial-match"); // Amarelo
-      } else if (tipo === "disabled") {
-        tecla.classList.add("disabled"); // Transparente (cinza escuro)
-      } else {
-        tecla.classList.add("disabled"); // Classe padrão, caso necessário
+
+    if (tecla.classList.contains("exact-match")){
+      return;
+    } else {
+      if (tecla) {
+        // Remove todas as classes antes de definir a nova classe
+        tecla.classList.remove("normal", "partial-match", "exact-match", "disabled");
+        if (tipo === "exact-match") {
+          tecla.classList.add("exact-match"); // Azul
+        } else if (tipo === "partial-match") {
+          tecla.classList.add("partial-match"); // Amarelo
+        } else if (tipo === "disabled") {
+          tecla.classList.add("disabled"); // Transparente (cinza escuro)
+        } else {
+          tecla.classList.add("disabled"); // Classe padrão, caso necessário
+        }
       }
     }
   }
