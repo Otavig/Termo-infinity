@@ -45,6 +45,10 @@ Nota: Este é um projeto que eu, Otávio Garcia, fiz por diversão e aprendizado
    ```bash
    node --watch ./app.js
    ```
+      ou
+   ```bash
+   npm start
+   ```
 
 4. O jogo estará disponível em `http://localhost:3002/termo-infity`.
 
