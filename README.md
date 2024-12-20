@@ -1,4 +1,4 @@
-# Termo Game
+# Termo Infinity
 
 Termo é um jogo de palavras desafiador onde o objetivo é descobrir uma palavra oculta em um número limitado de tentativas. A cada tentativa, o jogo fornece feedback sobre quais letras estão corretas e onde estão localizadas, ajudando o jogador a deduzir a palavra correta.
 
