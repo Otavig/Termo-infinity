@@ -23,19 +23,76 @@ app.use("/", pagesRouter);
 app.use((req, res) => {
   const htmlContent = `
     <html>
-      <head>
+            <head>
         <title>Erro 404 - Página Não Encontrada</title>
         <style>
+          /*======================
+            404 page
+          =======================*/
+          body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            overflow: hidden;
+          }
+          /* Animação do texto */
+          .page_404 {
+            text-align: center;
+            position: relative;
+          }
+          .page_404 h1 {
+            font-size: 120px;
+            font-weight: bold;
+            color: #333;
+            animation: bounceIn 1s ease-out;
+          }
+          @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+          }
+          .page_404 p {
+            font-size: 24px;
+            color: #666;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-out;
+          }
+          @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          /* Estilo do botão */
+          .link_404 {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #1D86E9;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(29, 134, 233, 0.3);
+            transition: all 0.3s ease;
+            animation: slideIn 1s ease-out;
+          }
+          @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+          }
+          .link_404:hover {
+            background-color: #0c6bb5;
+            box-shadow: 0 6px 20px rgba(29, 134, 233, 0.4);
+          }
           /* Estilização omitida para brevidade */
         </style>
       </head>
       <body>
-        <section class="page_404">
-          <h1>404</h1>
-          <p>Página Não Encontrada</p>
-          <a href="/termo-infinity" class="link_404">Voltar</a>
-        </section>
-      </body>
     </html>
   `;
   res.status(404).send(htmlContent);
