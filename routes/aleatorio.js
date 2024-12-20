@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 
 // Função para ler palavras do arquivo
-function obterPalavrasDoArquivo(caminhoArquivo) {
+async function obterPalavrasDoArquivo(caminhoArquivo) {
   try {
     const dados = fs.readFileSync(caminhoArquivo, "utf-8");
     return dados.split(/\s+/);
@@ -11,6 +11,12 @@ function obterPalavrasDoArquivo(caminhoArquivo) {
     console.error("Erro ao ler o arquivo:", erro.message);
     return [];
   }
+}
+
+// Função para obter uma palavra aleatória de um array
+function obterPalavraAleatoria(palavras) {
+  const indiceAleatorio = Math.floor(Math.random() * palavras.length);
+  return palavras[indiceAleatorio];
 }
 
 const caminhoArquivo = "src/palavras_sorteio.txt";
@@ -21,7 +27,7 @@ router.get("/", (req, res) => {
   if (palavras.length === 0) {
     return res.status(500).send("Erro ao carregar as palavras do arquivo");
   }
-  const palavraAleatoria = palavras[Math.floor(Math.random() * palavras.length)];
+  const palavraAleatoria = obterPalavraAleatoria(palavras);
   res.json({ word: palavraAleatoria });
 });
 
