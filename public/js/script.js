@@ -53,24 +53,25 @@ const telaAcerto = () => {
     parabenizacao = "<h2>Excelente! Você acertou rápido!</h2>";
   } else if (trys < 6 && trys > 3) {
     parabenizacao = "<h2>Boa! Você conseguiu!</h2>";
-  }
-  else if (trys === 6) {
+  } else if (trys === 6) {
     parabenizacao = "<h2>Uff, por pouco! Mas você conseguiu!</h2>";
   }
+
+  // Ajuste para "tentativa" ou "tentativas"
+  const tentativaTexto = trys === 1 ? "tentativa" : "tentativas";
 
   const html = `   
     <span class="close">&times;</span>
     <div style="color: white;">
         <h1 class="titulo">Vitória!</h1>
         ${parabenizacao}
-        <h3>Você acertou a palavra <span style="color: #3aa394;">${validWord}</span> em ${trys} tentativa!</h3>
+        <h3>Você acertou a palavra <span style="color: #3aa394;">${validWord}</span> em ${trys} ${tentativaTexto}!</h3>
     
         <div class="row-status">
         </div>
     
         <div class="emBaixo">
           <button onclick="window.location.reload()" class="btn-reload">Jogue novamente...</button>
-
         </div>
     </div>
     `;
