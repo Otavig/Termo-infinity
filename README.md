@@ -38,7 +38,7 @@ Nota: Este é um projeto que eu, Otávio Garcia, fiz por diversão e aprendizado
 
 4. **Inicie o jogo**:
 
-  Lembre-se de trocar todas as rotas para sua maquina local!!
+     Lembre-se de trocar todas as rotas para sua maquina local!!
 
 4. **Inicie o jogo**:
 
