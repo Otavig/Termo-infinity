@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadingIndicator.style.display = "block";
 
     const response = await fetch(
-      "https://teste-vercel-cz83.onrender.com/aleatorio"
+      "https://otavig.onrender.com/aleatorio"
     );
     const data = await response.json();
 
@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       // Primeiro, verifica a palavra na API principal
       const response = await fetch(
-        `https://teste-vercel-cz83.onrender.com/verificar?palavra=${word.toUpperCase()}`
+        `https://otavig.onrender.com/verificar?palavra=${word.toUpperCase()}`
       );
       const data = await response.json();
 
