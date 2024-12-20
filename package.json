@@ -4,10 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Otávio Garcia Dos Santos",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
