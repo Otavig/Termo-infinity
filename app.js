@@ -23,7 +23,7 @@ app.use("/", pagesRouter);
 app.use((req, res) => {
   const htmlContent = `
     <html>
-            <head>
+        <head>
         <title>Erro 404 - Página Não Encontrada</title>
         <style>
           /*======================
@@ -93,6 +93,12 @@ app.use((req, res) => {
         </style>
       </head>
       <body>
+        <section class="page_404">
+          <h1>404</h1>
+          <p>Página Não Encontrada</p>
+          <a href="/termo-infinity" class="link_404">Voltar</a>
+        </section>
+      </body>
     </html>
   `;
   res.status(404).send(htmlContent);
